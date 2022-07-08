@@ -28,6 +28,7 @@ function checkFormat(){
 function disableCard(){
     primeiraCarta.removeEventListener('click', flipCard);
     segundaCarta.removeEventListener('click', flipCard);
+    resetarTabuleiro();
 }
 
 function desvirarCarta(){
@@ -36,16 +37,24 @@ function desvirarCarta(){
         primeiraCarta.classList.remove('flip');
         segundaCarta.classList.remove('flip');
 
-        trancarTabuleiro = false;
+        resetarTabuleiro();
     }, 1500)
 }
 
 function resetarTabuleiro(){
     [cartaVirada, trancarTabuleiro] = [false, false];
+    [primeiraCarta, segundaCarta] = [null, null];
 }
 
 cards.forEach((card) => {
     card.addEventListener('click', flipCard)
 });
 
+
+(function embaralharCartas(){
+    cards.forEach((card) => {
+        let randomPosition = Math.floor(Math.random()*12);
+        card.style.order = randomPosition;
+    })
+})();
 
